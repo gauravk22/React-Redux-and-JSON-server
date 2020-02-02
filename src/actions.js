@@ -6,7 +6,7 @@ export const addPost = () => {
         	const j=await f.json();
 	
 		dispatch(addPostSuccess(j));
-		console.log('current state:', getState());
+		//console.log('current state:', getState());
 	}
 	catch(err){
 		console.log(err)
@@ -15,6 +15,23 @@ export const addPost = () => {
   };
 };
 
+export const updateFav=(id)=>{
+	return (dispatch,getState)=>{
+		dispatch(updateFavSuccess(id))
+                //console.log('current state after fav:', getState());
+
+		let m=getState().filter(g=>g.id==id)[0]
+		console.log(m)
+
+		fetch(`http://localhost:3000/posts/${id}`,{
+			method:'PATCH',
+			headers:{'Content-Type': 'application/json','crossDomain':true},
+			body:JSON.stringify(m)
+		}).then(res=>console.log(res))
+	}
+
+}
+
 const addPostSuccess = post => ({
   type: "ADD_DATA",
   payload: [
@@ -22,3 +39,7 @@ const addPostSuccess = post => ({
   ]
 });
 
+const updateFavSuccess=id=>({
+  type:"FAV",
+  payload:id
+});
