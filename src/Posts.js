@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useSelector,useDispatch } from 'react-redux'
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import {addPost,updateFav} from './actions';
 
-import {store} from './index'
 
 export default function Posts(){
 
     useEffect(()=>{
-        getpost();
+	dispatch(addPost());    
     },[])
    
     const items=useSelector(state=>state)
@@ -32,9 +31,6 @@ export default function Posts(){
             ))
     }
 
-   function getpost(){
-	dispatch(addPost());
-	}
 
 /*
     async function getpost(){

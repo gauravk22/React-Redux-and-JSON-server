@@ -5,11 +5,9 @@ var initialState = [];
       case "ADD_DATA":
         return action.payload;
       case "FAV":
-	return state.map((s)=>(s["id"]==action.payload)?{...s,"isFavourite":!s["isFavourite"]}:s);
-      case "UNFAV":
-        return {
-          
-        };
+	return state.map((s)=>(s["id"]===action.payload)?{...s,"isFavourite":!s["isFavourite"]}:s);
+      case "ALLFAV":
+        return action.payload;
       default:
         return state;
     }
