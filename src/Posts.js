@@ -43,10 +43,12 @@ export default function Posts(){
     }
  */  
     return(
-        
+	<> 
+	<h3>List of Posts</h3>       
         <div>
             {showList()}
         </div>
+	</>
     )
 
 }

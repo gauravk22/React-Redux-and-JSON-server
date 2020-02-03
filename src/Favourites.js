@@ -15,7 +15,9 @@ export default function Favourites(){
 
 
     const showList=()=>{
-         return items.map(post=>(
+         return items.map(post=>{
+		if(post.isFavourite){
+		return (
             <div className="post" key={post.id}>
             <h4>{post.id}.{post.title}</h4>
             <p>{post.body}</p>
@@ -26,13 +28,15 @@ export default function Favourites(){
                 </button>
             </div>
             </div>
-            ))
+            )}})
     }
 
 
 	return(
+		<>
+		<h3>List of only favorited posts</h3>
 		<div>{showList()}</div>
-
-	)
+		</>
+	)	
 
 }
