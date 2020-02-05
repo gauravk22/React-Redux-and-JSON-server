@@ -1,23 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 
 import { useSelector,useDispatch } from 'react-redux'
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import {addPost,updateFav} from './actions';
 
+import LoadingSpin from './LoadingSpin';
 
+var i=0;
 export default function Posts(){
 
-    useEffect(()=>{
-	dispatch(addPost());    
+    const dispatch=useDispatch();
+    const items=useSelector(state=>state)
+
+    const [data,changeData]=useState([]);
+   
+    const [load,changeLoad]=useState(true)
+ 
+   useEffect(()=>{
+	dispatch(addPost());   
     },[])
    
-    const items=useSelector(state=>state)
-    const dispatch=useDispatch();
-    
+    useEffect(()=>{
+		changeData(items.slice(0,i+10))
+	
+		return ()=>{i=0;}	
+	},[items]) 
 
     const showList=()=>{
-         return items.map(post=>(
+         return data.map(post=>(
             <div className="post" key={post.id}>
             <h4>{post.id}.{post.title}</h4> 
             <p>{post.body}</p> 
@@ -32,6 +43,18 @@ export default function Posts(){
     }
 
 
+	const fetchData=()=>{
+
+		if(i>=100){
+			changeLoad(false)
+			return;	
+		}
+		setTimeout(()=>{
+			i+=10;
+	                 changeData(items.slice(0,i))
+		},500)
+	}
+
 /*
     async function getpost(){
 
@@ -45,9 +68,21 @@ export default function Posts(){
     return(
 	<> 
 	<h3>List of Posts</h3>       
-        <div>
+        <InfiniteScroll
+  	dataLength={i} //This is important field to render the next data
+  	next={fetchData}
+  	hasMore={load}
+	scrollThreshold={1}
+	  loader={<LoadingSpin/>}
+	  endMessage={
+    	<p style={{textAlign: 'center'}}>
+     	 <b>Yay! You have seen it all</b>
+    	</p>
+  	}>
+	<div>
             {showList()}
         </div>
+	</InfiniteScroll>
 	</>
     )
 
