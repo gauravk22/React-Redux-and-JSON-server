@@ -11,6 +11,7 @@ Clone the entire repository to your system
 
 React app:
 Page 1
+
 - Render a list of Posts.
 - Make api request to http://localhost:3000/posts to get posts. Use redux to
 put data in store. On page 1, render a list of Posts
@@ -18,7 +19,9 @@ put data in store. On page 1, render a list of Posts
 - Individual items from the list should have a toggle to mark it as favourite
 - Favourites can be unfavorited also
 - Do a put or patch api request to save the clicked post
+
 Page 2
+
 - Render a list of only favorited posts.
 - Make api request to http://localhost:3000/posts?isFavourite=true to get
 favorited posts
