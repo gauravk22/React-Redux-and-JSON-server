@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+   background-color: darkslategray; 
 }
 
 .App-logo {
@@ -37,43 +38,17 @@
   }
 }
 
-.post{
-  border: 2px solid black;
-  border-radius: 5px;
-
-  margin:5px;
-}
-
-.fav-button{
- background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.page1,.page2{
-
- border-radius:5px;
-margin:2px;
-}
-
-.btns{
-	display:flex;
-	flex-direction:row;
-	justify-content:flex-end;
-	
-}
-
-h3{
-   text-decoration:underline
-}
-
 img{
 	width:100px;
 	height:100px;
+}
+
+.c1{
+  margin:15px;
+  color:darkslategray;
+}
+
+.c1:hover{
+  color:teal
 }
 
