@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-   background-color: darkslategray; 
+  background-color: darkslategray;
 }
 
 .App-logo {
@@ -38,17 +38,21 @@
   }
 }
 
-img{
-	width:100px;
-	height:100px;
+img {
+  width: 100px;
+  height: 100px;
 }
 
-.c1{
-  margin:15px;
-  color:darkslategray;
+.c1 {
+  margin: 15px;
+  color: darkslategray;
 }
 
-.c1:hover{
-  color:teal
+.c1:hover {
+  color: teal;
 }
 
+.div1 {
+  overflow-y: scroll;
+  max-height: 700px;
+}

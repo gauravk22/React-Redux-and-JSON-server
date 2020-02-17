@@ -1,44 +1,33 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { loadPosts } from '../actions/Actions';
-import Card from './Card'
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { loadPosts } from "../actions/ActionCreators"
+import Card from "./Card"
 
 export default function Posts() {
+  const dispatch = useDispatch()
+  const items = useSelector((state) => state.posts)
 
-	const dispatch = useDispatch();
-	const items = useSelector(state => state.posts)
+  const showList = () => {
+    return items.map((post) => <Card key={post.id} {...post} />)
+  }
 
-	/*useEffect(() => {
-		dispatch(loadPosts());
-	}, [])
-*/
-	const showList = () => {
-		return items.map(post => (
-			<Card key={post.id} post={post} />
-		))
-	}
+  const fetchData = () => {
+    setTimeout(() => {
+      dispatch(loadPosts())
+    }, 500)
+  }
 
-	window.onscroll = () => {
-		var x=window.scrollY+window.innerHeight-document.body.offsetHeight;
-		if(x>=0 && x<=20){
-			fetchData();
-		}
-	}
+  const handleScroll = (event) => {
+    var element = event.target
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      fetchData()
+      console.log("scrolled bottom")
+    }
+  }
 
-	const fetchData = () => {
-		setTimeout(() => {
-			dispatch(loadPosts())
-		}, 500)
-	}
-
-	return (
-		<>
-			
-			<div>
-				{showList()}
-			</div>
-		</>
-	)
-
+  return (
+    <div className="div1" onScroll={(e) => handleScroll(e)}>
+      <div>{showList()}</div>
+    </div>
+  )
 }
-
