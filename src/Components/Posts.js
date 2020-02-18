@@ -18,11 +18,11 @@ export default function Posts() {
   }
 
   const handleScroll = (event) => {
-    var element = event.target
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+    if (
+      event.target.scrollHeight - event.target.scrollTop ===
+      event.target.clientHeight
+    )
       fetchData()
-      console.log("scrolled bottom")
-    }
   }
 
   return (
