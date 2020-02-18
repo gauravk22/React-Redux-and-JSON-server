@@ -19,7 +19,9 @@ Page 1
 - Individual items from the list should have a toggle to mark it as favourite
 - Favourites can be unfavorited also
 - Do a put or patch api request to save the clicked post
-  Page 2
+
+Page 2
+
 - Render a list of only favorited posts.
 - Make api request to http://localhost:3000/posts?isFavourite=true to get
   favorited posts
