@@ -23,11 +23,11 @@ module.exports = {
     'react',
   ],
   rules: {
-	"no-console": "off",
-	"no-var":"off",
 	"react/jsx-filename-extension":"off",
 	"no-undef":"warn",
+	"no-console": ["error", { allow: ["warn", "error"] }],
 	"react/require-default-props":"off",
-	"react/jsx-props-no-spreading":"off"
+	"react/jsx-props-no-spreading":"off",
+	"react/jsx-pascal-case":"warn"
   },
 };

@@ -1,6 +1,6 @@
 import { getPostSuccess, updatePostSuccess, getFavPost } from "./Actions"
 
-var counter = 1
+let counter = 1
 
 export const loadPosts = () => {
   return async (dispatch) => {
@@ -14,30 +14,30 @@ export const loadPosts = () => {
         counter += 1
         dispatch(getPostSuccess(fetchData))
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     }
   }
 }
 
 export const updatePostById = (id) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch(updatePostSuccess(id))
 
-    let [updatedPost] = getState().posts.filter((g) => g.id === id)
+    let updatedPost = getState().posts.find((g) => g.id === id)
 
-    if (updatedPost === undefined) {
-      const [updatedPost1] = getState().favourites.filter((g) => g.id === id)
-      updatedPost = updatedPost1
+    if (updatedPost === undefined)
+      updatedPost = getState().favourites.find((g) => g.id === id)
+
+    try {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", crossDomain: true },
+        body: JSON.stringify(updatedPost)
+      })
+    } catch (err) {
+      console.error(err)
     }
-
-    fetch(`http://localhost:3000/posts/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", crossDomain: true },
-      body: JSON.stringify(updatedPost)
-    })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err))
   }
 }
 
@@ -50,7 +50,7 @@ export const getFavPosts = () => {
       const fetchData = await fetchCall.json()
       dispatch(getFavPost(fetchData))
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 }
